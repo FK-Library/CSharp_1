@@ -7,22 +7,31 @@ namespace PriceCalculator
 {
     public class ThreeMilkAnd4thMilkIsFree : IApplyOfferService
     {
-        //
         private string description => "Buy 3 Milk and get the 4th milk for free";
         private decimal reduction;
         public ThreeMilkAnd4thMilkIsFree()
         {
             this.reduction = 0m;
         }
-
+                
         public bool CanApply(IBasketService basketService)
         {
             bool hasFourMilk = false;
+            var numberOfMilkinBasket = 0;
+            var milkCost = 0m;
 
-            var numberOfMilkinBasket = basketService.Products().Select(x => x.Product().Equals("Milk")).Count();
-            if (numberOfMilkinBasket/4 >= 1)
+            foreach (var product in basketService.Products())
             {
-                this.reduction = (numberOfMilkinBasket/4) * -1.15m;
+                if (product.Product().Equals("Milk"))
+                {
+                    numberOfMilkinBasket ++;
+                    milkCost = product.Price();
+                }
+            }
+
+            if (numberOfMilkinBasket >= 4)
+            {
+                this.reduction = (numberOfMilkinBasket % 4) * milkCost;
                 hasFourMilk = true;
             }
             return hasFourMilk;

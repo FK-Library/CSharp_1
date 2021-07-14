@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PriceCalculator;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PriceCalculatorTests
 {
@@ -48,7 +49,9 @@ namespace PriceCalculatorTests
             basket.Add(new Butter());
 
             // Act
+            var total = basket.Products().Count();
             var result = basketTotalCalculator.GetTotalPrice(basket);
+            var total2 = basket.Products().Count();
 
             // Assert
             Assert.AreEqual(expected,result);
