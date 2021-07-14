@@ -31,14 +31,9 @@ namespace PriceCalculator
             var offerBasket = this.ApplyOffers(basket);
             decimal totalCost = 0;
 
-        //var x = from prod in basket.Products()
-        //        select prod;    
-
-
-
             foreach (var product in basket.Products())
             {
-                totalCost += product.Price;
+                totalCost += product.Price();
             }
             return totalCost;
         }

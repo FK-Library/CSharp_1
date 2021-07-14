@@ -18,16 +18,16 @@ namespace PriceCalculator
             int butterCount = 0;
             bool hasBread = false;
 
-            foreach (var product in basketService.Products)
+            foreach (var product in basketService.Products())
             {
-                if (product.Product.Equals("Butter"))
+                if (product.Product().Equals("Butter"))
                 {
                     butterCount++;
                 }
-                else if (product.Product.Equals("Bread"))
+                else if (product.Product().Equals("Bread"))
                 {
                     hasBread = true;
-                    this.reduction = product.Price * -0.5m;
+                    this.reduction = product.Price() * -0.5m;
                 }
             }
 

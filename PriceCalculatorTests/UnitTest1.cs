@@ -15,10 +15,10 @@ namespace PriceCalculatorTests
             };
 
         [TestMethod]
-        public void SUT_Given1BreadAnd1Milk_ReturnsTotalOfTwoPointNintyFive()
+        public void GetTotalPrice_Given1BreadAnd1Milk_ReturnsTotalOfTwoPointNintyFive()
         {
             // Arrange 
-            var expected = 2.95;
+            var expected = 2.95m;
             var basketTotalCalculator = new TotalBasketCalculation(this.offersCollection);
             
             var basket = new BasketService();
@@ -30,22 +30,71 @@ namespace PriceCalculatorTests
             var result = basketTotalCalculator.GetTotalPrice(basket);
 
             // Assert
-            Assert.AreEqual(result, expected);
+            Assert.AreEqual(expected, result);
+
         }
 
         [TestMethod]
-        public void SUT_Given2ButterAnd2Bread_ReturnsTotalOfThreePointTen()
+        public void GetTotalPrice_Given2ButterAnd2Bread_ReturnsTotalOfThreePointTen()
         {
+            // Arrange 
+            var expected = 3.10m;
+            var basketTotalCalculator = new TotalBasketCalculation(this.offersCollection);
+
+            var basket = new BasketService();
+            basket.Add(new Bread());
+            basket.Add(new Butter());
+            basket.Add(new Butter());
+
+            // Act
+            var result = basketTotalCalculator.GetTotalPrice(basket);
+
+            // Assert
+            Assert.AreEqual(expected,result);
         }
 
         [TestMethod]
-        public void SUT_Given4Milk_ReturnsTotalOfThreePointfourtyFive()
+        public void GetTotalPrice_Given4Milk_ReturnsTotalOfThreePointfourtyFive()
         {
+            // Arrange 
+            var expected = 3.45m;
+            var basketTotalCalculator = new TotalBasketCalculation(this.offersCollection);
+
+            var basket = new BasketService();
+            basket.Add(new Milk());
+            basket.Add(new Milk());
+            basket.Add(new Milk());
+            basket.Add(new Milk());
+
+            // Act
+            var result = basketTotalCalculator.GetTotalPrice(basket);
+
+            // Assert
+            Assert.AreEqual(expected, result);
+
         }
 
         [TestMethod]
-        public void SUT_Given2ButterAnd1BreadAnd8Milk_ReturnsTotalOfNine()
+        public void GetTotalPrice_Given2ButterAnd1BreadAnd8Milk_ReturnsTotalOfNine()
         {
+            // Arrange 
+            var expected = 9m;
+            var basketTotalCalculator = new TotalBasketCalculation(this.offersCollection);
+
+            var basket = new BasketService();
+            basket.Add(new Bread());
+            basket.Add(new Milk());
+            basket.Add(new Butter());
+            basket.Add(new Butter());
+
+
+            // Act
+            var result = basketTotalCalculator.GetTotalPrice(basket);
+
+            // Assert
+            Assert.AreEqual(expected, result);
+
+
         }
     }
 }

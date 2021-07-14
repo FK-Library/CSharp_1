@@ -17,10 +17,9 @@ namespace PriceCalculator
 
         public bool CanApply(IBasketService basketService)
         {
-            int milkCount = 0;
             bool hasFourMilk = false;
 
-            var numberOfMilkinBasket = basketService.Products.Select(x => x.Product.Equals("Milk")).Count();
+            var numberOfMilkinBasket = basketService.Products().Select(x => x.Product().Equals("Milk")).Count();
             if (numberOfMilkinBasket/4 >= 1)
             {
                 this.reduction = (numberOfMilkinBasket/4) * -1.15m;
