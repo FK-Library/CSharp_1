@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace PriceCalculatorTests
 {
     [TestClass]
-    public class UnitTest1
+    public class TotalBasketCalculationTests
     {
         private  List<IApplyOfferService> offersCollection = 
             new List<IApplyOfferService>
@@ -15,7 +15,7 @@ namespace PriceCalculatorTests
             };
 
         [TestMethod]
-        public void GetTotalPrice_Given1BreadAnd1Milk_ReturnsTotalOfTwoPointNintyFive()
+        public void GetTotalPrice_Given1BreadAnd1ButterAnd1Milk_ReturnsTotalOfTwoPointNintyFive()
         {
             // Arrange 
             var expected = 2.95m;
@@ -31,17 +31,18 @@ namespace PriceCalculatorTests
 
             // Assert
             Assert.AreEqual(expected, result);
-
         }
 
         [TestMethod]
         public void GetTotalPrice_Given2ButterAnd2Bread_ReturnsTotalOfThreePointTen()
         {
             // Arrange 
+            //(2*0.8) +(1*1.00) =2.60 -0.5 = 2.10 +1.00 = 3.10
             var expected = 3.10m;
             var basketTotalCalculator = new TotalBasketCalculation(this.offersCollection);
 
             var basket = new BasketService();
+            basket.Add(new Bread());
             basket.Add(new Bread());
             basket.Add(new Butter());
             basket.Add(new Butter());
@@ -78,23 +79,31 @@ namespace PriceCalculatorTests
         public void GetTotalPrice_Given2ButterAnd1BreadAnd8Milk_ReturnsTotalOfNine()
         {
             // Arrange 
+            //2*0.8 = 1.60 +1*1.00 = 2.60 /2 = 1.30 ->with 50 percent off
+            //6*1.15 = 6.90
+            //total should be 7.90
             var expected = 9m;
             var basketTotalCalculator = new TotalBasketCalculation(this.offersCollection);
 
             var basket = new BasketService();
             basket.Add(new Bread());
             basket.Add(new Milk());
+            basket.Add(new Milk());
+            basket.Add(new Milk());
+            basket.Add(new Milk());
+            basket.Add(new Milk());
+            basket.Add(new Milk());
+            basket.Add(new Milk());
+            basket.Add(new Milk());
+            basket.Add(new Milk());
             basket.Add(new Butter());
             basket.Add(new Butter());
-
 
             // Act
             var result = basketTotalCalculator.GetTotalPrice(basket);
 
             // Assert
             Assert.AreEqual(expected, result);
-
-
         }
     }
 }
