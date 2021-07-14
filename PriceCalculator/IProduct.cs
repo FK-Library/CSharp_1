@@ -6,7 +6,7 @@ namespace PriceCalculator
 {
     public interface IProduct
     {
-        string Product { get;  }
-        decimal Price { get;  }
+        string Product();
+        decimal Price(); // { get;  }
     }
 }

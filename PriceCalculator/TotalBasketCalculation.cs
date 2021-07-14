@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PriceCalculator
 {
-    class TotalBasketCalculation : IBasketTotalCalculator
+    public class TotalBasketCalculation : IBasketTotalCalculator
     {
         private List<IApplyOfferService> offers;
 
@@ -22,7 +23,6 @@ namespace PriceCalculator
                     basket = offer.Apply(basket);
                 }
             }
-
             return basket;
         }
 
@@ -31,7 +31,12 @@ namespace PriceCalculator
             var offerBasket = this.ApplyOffers(basket);
             decimal totalCost = 0;
 
-            foreach (var product in basket.Products)
+        //var x = from prod in basket.Products()
+        //        select prod;    
+
+
+
+            foreach (var product in basket.Products())
             {
                 totalCost += product.Price;
             }

@@ -1,13 +1,36 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PriceCalculator;
+using System.Collections.Generic;
 
 namespace PriceCalculatorTests
 {
     [TestClass]
     public class UnitTest1
     {
+        private  List<IApplyOfferService> offersCollection = 
+            new List<IApplyOfferService>
+            {
+                new TwoButterFiftyPercentOffBreadOffer(),
+                new ThreeMilkAnd4thMilkIsFree()
+            };
+
         [TestMethod]
         public void SUT_Given1BreadAnd1Milk_ReturnsTotalOfTwoPointNintyFive()
         {
+            // Arrange 
+            var expected = 2.95;
+            var basketTotalCalculator = new TotalBasketCalculation(this.offersCollection);
+            
+            var basket = new BasketService();
+            basket.Add(new Bread());
+            basket.Add(new Milk());
+            basket.Add(new Butter());
+
+            // Act
+            var result = basketTotalCalculator.GetTotalPrice(basket);
+
+            // Assert
+            Assert.AreEqual(result, expected);
         }
 
         [TestMethod]

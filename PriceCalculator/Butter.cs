@@ -6,8 +6,8 @@ namespace PriceCalculator
 {
     public class Butter : IProduct
     {
-        public string Product => "Butter";
+        public string Product() => "Butter";
 
-        public decimal Price => 0.8m;
+        public decimal Price() => 0.8m;
     }
 }

@@ -7,6 +7,6 @@ namespace PriceCalculator
     public interface IBasketService
     {
         void Add(IProduct product);
-        List<IProduct> Products { get;  }
+        List<IProduct> Products(); // { get;  }
     }
 }

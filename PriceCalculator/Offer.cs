@@ -15,8 +15,8 @@ namespace PriceCalculator
             this.reduction = reduction;
         }
 
-        public string Product => this.description;
+        public string Product() => this.description;
 
-        public decimal Price => this.reduction;
+        public decimal Price() => this.reduction;
     }
 }

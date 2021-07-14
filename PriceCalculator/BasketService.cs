@@ -6,18 +6,20 @@ namespace PriceCalculator
 {
     public class BasketService : IBasketService
     {
-        private List<IProduct> products;
-        public BasketService(List<IProduct> products)
+        public List<IProduct> basket;
+
+        public BasketService() 
         {
-            this.products = products;
+            this.basket = new List<IProduct>(); 
         }
-        public List<IProduct> Products => this.products;
-        //{ get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public List<IProduct> Products() => this.basket;
 
         public void Add(IProduct product)
         {
-            this.products.Add(product);
-            //throw new NotImplementedException();
+            this.basket.Add(product);
         }
+
+       
     }
 }
